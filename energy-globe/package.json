@@ -1,0 +1,14 @@
+{
+  "name": "energy-globe",
+  "description": "",
+  "scripts": {
+    "build": "esbuild src/index.js --outfile=dist.js --bundle --define:process.env.MAPBOX_API_KEY=\\\"$MAPBOX_API_KEY\\\""
+  },
+  "devDependencies": {
+    "esbuild": "^0.14.48"
+  },
+  "dependencies": {
+    "chart.js": "^3.8.0",
+    "mapbox-gl": "^2.9.1"
+  }
+}

@@ -3,7 +3,6 @@ import mapboxgl from "mapbox-gl";
 export function buildPopup(feature) {
     const coordinates = feature.geometry.coordinates.slice();
     const properties = feature.properties;
-    console.log(properties);
 
     // Build the contents
     const container = document.createElement('div');

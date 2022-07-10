@@ -11,16 +11,18 @@ const chartConfig = {
         labels: Object.keys(legendColors),
         datasets: [
           {
-            data: [1, 1, 1, 1, 1, 1, 1, 1],
+            data: [0, 0, 0, 0, 0, 0, 0, 0],
             backgroundColor: Object.values(legendColors),
           }
         ]
       },
     options: {
-        responsive: false,
+        responsive: true,
+        maintainAspectRatio: false,
         plugins: {
             legend: {
-                position: 'top'
+                position: 'top',
+                display: window.innerWidth > 800,
             },
             title: {
                 display: true,
@@ -38,14 +40,7 @@ export function createChart() {
     return new Chart(document.getElementById('chart'), chartConfig);
 }
 
-export function hideChart() {
-    document.getElementById('description').style.display = 'block';
-    document.getElementById('chart').style.display = 'none';
-}
-
 export function updateChartData(chart, newValues) {
-    document.getElementById('chart').style.display = 'block';
-    document.getElementById('description').style.display = 'none';
     chart.data.datasets[0].data = newValues;
     chart.update();
 }

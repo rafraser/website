@@ -34,14 +34,20 @@ function addPowerplantsData(map) {
 
     // Load up our power plants
     map.addSource('powerplants', {
-        type: 'geojson',
-        data: './powerplants.geojson'
+        type: 'vector',
+        attribution: 'World Resources Institute',
+        tiles: [
+            'https://tiles.robertafraser.com/powerplants/{z}/{x}/{y}.pbf'
+        ],
+        minzoom: 0,
+        maxzoom: 3,
     });
 
     map.addLayer({
         'id': 'powerplants-layer',
         'type': 'circle',
         'source': 'powerplants',
+        'source-layer': 'powerplants',
         'paint': {
             'circle-radius': ['interpolate', ['linear'], ['zoom'], 3, 1, 5, 3, 8, 5, 10, 12],
             'circle-color': ['match', ['get', 'primary_fuel']].concat(styleColors).concat(['#a6cee3']),

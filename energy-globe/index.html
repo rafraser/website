@@ -21,17 +21,9 @@
 
     <div id="overlay">
         <div id="legend" class="card"></div>
-        <div id="chart-container" class="card">
-            <canvas id="chart" width="320" height="280" style="display: none;"></canvas>
-            <div id="description">
-                <h1>Global Power Plant Database</h1>
-                <p>This map is a visualisation of power plants around the world.
-                    Approximately 35,000 power plants are covered across 167 different countries.
-                </p>
-                <p>Data is sourced from the <a href="https://datasets.wri.org/dataset/globalpowerplantdatabase">World
-                        Resources Institute</a>.</p>
-                <p>Click on a powerplant for more information!</p>
-                <p>Zoom in further for a pie chart to appear here!</p>
+        <div id="settings" class="card">
+            <div id="chart-container">
+                <canvas id="chart"></canvas>
             </div>
 
             <div id="basemap-select-container">
@@ -44,6 +36,15 @@
                 </select>
             </div>
         </div>
+
+        <div id="description" class="card">
+            <h1>Global Power Plant Database</h1>
+            <p>This map visualises approximately 35,000 power plants across 167 countries.
+                Data is sourced from the <a href="https://datasets.wri.org/dataset/globalpowerplantdatabase">World
+                    Resources Institute.</a>
+            </p>
+        </div>
+    </div>
     </div>
     <script src="dist.js"></script>
 </body>

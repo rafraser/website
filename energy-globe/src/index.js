@@ -1,7 +1,7 @@
 import './index.css';
 import { createMap, changeBasemapStyle } from './map';
 import { legendColors, createLegend } from './legend';
-import { createChart, hideChart, updateChartData } from './chart';
+import { createChart, updateChartData } from './chart';
 import { buildPopup } from './popup';
 
 const map = createMap();
@@ -12,13 +12,9 @@ createLegend();
 function viewportChanged() {
     if (!map.getLayer('powerplants-layer')) return;
 
-    if (map.getZoom() > 5) {
-        const features = map.queryRenderedFeatures({ layers: ['powerplants-layer'] });
-        const powerTotals = calculatePowerTotals(features, 'capacity_mw');
-        updateChartData(chart, powerTotals);
-    } else {
-        hideChart();
-    }
+    const features = map.queryRenderedFeatures({ layers: ['powerplants-layer'] });
+    const powerTotals = calculatePowerTotals(features, 'capacity_mw');
+    updateChartData(chart, powerTotals);
 }
 
 function calculatePowerTotals(features, key) {
@@ -39,6 +35,7 @@ function calculatePowerTotals(features, key) {
 
 map.on('dragend', viewportChanged);
 map.on('zoomend', viewportChanged);
+map.once('load', viewportChanged);
 
 // Make a nice popup whenever a power plant is clicked on
 map.on('click', 'powerplants-layer', (e) => {

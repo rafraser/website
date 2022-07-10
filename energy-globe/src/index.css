@@ -24,7 +24,7 @@
 
 .card {
     background-color: white;
-    margin: 4px;
+    margin: 6px;
     padding: 8px;
     box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
     pointer-events: all;
@@ -45,28 +45,43 @@
     vertical-align: middle;
 }
 
-/* Chart/info layout */
-#chart-container {
+/* Chart / settings layout */
+#settings {
     position: absolute;
     top: 0px;
     right: 0px;
 
-    width: 320px;
-    height: 320px;
+    width: 20vw;
+    height: 20vw;
+    min-width: 200px;
+    min-height: 200px;
+    max-width: 500px;
+    max-height: 500px;
 }
 
-#description>h1 {
-    font-size: 20px;
-}
-
-#description>p {
-    font-size: 16px;
-    padding: 4px;
+#chart-container {
+    height: 80%;
 }
 
 #basemap-select-container {
     position: absolute;
     bottom: 8px;
+}
+
+/* Description */
+#description {
+    position: absolute;
+    bottom: 32px;
+    right: 0px;
+}
+
+#description>h1 {
+    font-size: 1em;
+}
+
+#description>p {
+    font-size: 0.75em;
+    padding: 4px;
 }
 
 /* Popup layout */

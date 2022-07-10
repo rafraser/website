@@ -6,7 +6,7 @@
     "url": "git+https://github.com/rafraser/website.git"
   },
   "scripts": {
-    "eslint": "eslint"
+    "lint": "eslint */src/**/*.js"
   },
   "devDependencies": {
     "eslint": "^8.19.0",

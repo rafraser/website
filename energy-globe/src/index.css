@@ -1,3 +1,4 @@
+/* Basic layout stuff */
 * {
     margin: 0;
     padding: 0;
@@ -18,10 +19,30 @@
     pointer-events: none;
 }
 
+.card {
+    background-color: white;
+    margin: 4px;
+    padding: 8px;
+    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
+    pointer-events: all;
+}
+
+/* Legend layout */
 #legend {
     display: inline-block;
 }
 
+.legend-bubble {
+    width: 12px;
+    height: 12px;
+    border-radius: 100%;
+    margin-right: 6px;
+
+    display: inline-block;
+    vertical-align: middle;
+}
+
+/* Chart/info layout */
 #chart-container {
     position: absolute;
     top: 0px;
@@ -40,24 +61,12 @@
     padding: 4px;
 }
 
-.legend-bubble {
-    width: 12px;
-    height: 12px;
-    border-radius: 100%;
-    margin-right: 6px;
-
-    display: inline-block;
-    vertical-align: middle;
+#basemap-select-container {
+    position: absolute;
+    bottom: 8px;
 }
 
-.card {
-    background-color: white;
-    margin: 4px;
-    padding: 8px;
-    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
-    pointer-events: all;
-}
-
+/* Popup layout */
 table {
     font-size: 12px;
 }

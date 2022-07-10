@@ -4,6 +4,13 @@ import { legendColors } from './legend.js';
 
 mapboxgl.accessToken = process.env.MAPBOX_API_KEY;
 
+const basemapStyles = {
+    'light': 'mapbox://styles/mapbox/light-v10',
+    'dark': 'mapbox://styles/mapbox/dark-v10',
+    'streets': 'mapbox://styles/mapbox/streets-v11',
+    'satellite': 'mapbox://styles/mapbox/satellite-v9'
+}
+
 // Build the expression for Mapbox
 const styleColors = Object.entries(legendColors).reduce((acc, [key, value]) => {
     if (key == 'Other') return acc;
@@ -13,30 +20,39 @@ const styleColors = Object.entries(legendColors).reduce((acc, [key, value]) => {
 export function createMap() {
     const map = new mapboxgl.Map({
         container: 'map',
-        style: 'mapbox://styles/mapbox/light-v10', // todo: custom style!
+        style: basemapStyles['light'],
         projection: 'globe'
     });
 
-    map.on('load', () => {
-        // Create a basic atmosphere on load
-        map.setFog({});
+    map.once('style.load', () => { addPowerplantsData(map) } );
+    return map;
+}
 
-        // Load up our power plants
-        map.addSource('powerplants', {
-            type: 'geojson',
-            data: './powerplants.geojson'
-        });
+function addPowerplantsData(map) {
+    // Create the default atmosphere
+    map.setFog({});
 
-        map.addLayer({
-            'id': 'powerplants-layer',
-            'type': 'circle',
-            'source': 'powerplants',
-            'paint': {
-                'circle-radius': ['interpolate', ['linear'], ['zoom'], 3, 1, 5, 3, 8, 5, 10, 12],
-                'circle-color': ['match', ['get', 'primary_fuel']].concat(styleColors).concat(['#a6cee3']),
-            }
-        });
+    // Load up our power plants
+    map.addSource('powerplants', {
+        type: 'geojson',
+        data: './powerplants.geojson'
     });
 
-    return map;
+    map.addLayer({
+        'id': 'powerplants-layer',
+        'type': 'circle',
+        'source': 'powerplants',
+        'paint': {
+            'circle-radius': ['interpolate', ['linear'], ['zoom'], 3, 1, 5, 3, 8, 5, 10, 12],
+            'circle-color': ['match', ['get', 'primary_fuel']].concat(styleColors).concat(['#a6cee3']),
+        }
+    });
+}
+
+export function changeBasemapStyle(map, style) {
+    const newBasemapUrl = basemapStyles[style];
+    if (!newBasemapUrl) return;
+
+    map.setStyle(newBasemapUrl);
+    map.once('style.load', () => { addPowerplantsData(map) } );
 }

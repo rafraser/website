@@ -13,4 +13,9 @@ The processing for this dataset is pretty simple - essentially just converting a
 
 If I had a bit more time, I'd tile the output data. However, the finalised geojson is simple enough that the tiling isn't all that important.
 
-## AAAA
+## Future Work
+
+I'm pretty happy with the end result here! However, there's more work that could still be done:
+
+- Graph capacity vs. generation
+- Click on values in the legend to filter them out

@@ -1,5 +1,5 @@
 import './index.css';
-import { createMap } from './map';
+import { createMap, changeBasemapStyle } from './map';
 import { legendColors, createLegend } from './legend';
 import { createChart, hideChart, updateChartData } from './chart';
 import { buildPopup } from './popup';
@@ -12,7 +12,7 @@ createLegend();
 function viewportChanged() {
     if (!map.getLayer('powerplants-layer')) return;
 
-    if (map.getZoom() > 6) {
+    if (map.getZoom() > 5) {
         const features = map.queryRenderedFeatures({ layers: ['powerplants-layer'] });
         const powerTotals = calculatePowerTotals(features, 'capacity_mw');
         updateChartData(chart, powerTotals);
@@ -55,3 +55,9 @@ map.on('mouseenter', 'powerplants-layer', () => {
 map.on('mouseleave', 'powerplants-layer', () => {
     map.getCanvas().style.cursor = '';
 });
+
+// Basemap changing
+function selectedNewBasemap(event) {
+    changeBasemapStyle(map, event.target.value);
+}
+document.getElementById("basemap-select").onchange = selectedNewBasemap;

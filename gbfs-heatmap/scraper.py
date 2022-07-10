@@ -16,7 +16,7 @@ GBFS_FEEDS = {
 }
 
 
-class DiscoveryFeed():
+class DiscoveryFeed:
     def __init__(self, data: dict):
         # this will bite me if I ever process non-en feeds...
         # GBFS has a bunch of feed types, but I'm only interested in plotting bike locations
@@ -28,7 +28,7 @@ class DiscoveryFeed():
                 self.vehicle_types = feed["url"]
 
 
-class VehicleTypesFeed():
+class VehicleTypesFeed:
     def __init__(self, data):
         self.vehicle_types = {}
         for vehicle_data in data["data"]["vehicle_types"]:
@@ -42,7 +42,7 @@ class VehicleTypesFeed():
         return {id: info.form_factor for (id, info) in self.vehicle_types.items()}
 
 
-class VehicleType():
+class VehicleType:
     def __init__(self, data):
         self.id = data["vehicle_type_id"]
         self.form_factor = data.get("form_factor", "bicycle")
@@ -50,7 +50,7 @@ class VehicleType():
         self.range = data.get("max_range_meters", 0)
 
 
-class FreeBikeStatusFeed():
+class FreeBikeStatusFeed:
     def __init__(self, url, data):
         # This is the only feed we'll be checking repeatedly, so save the timestamps!
         self.url = url
@@ -73,7 +73,7 @@ class FreeBikeStatusFeed():
         df.to_csv(path, index=False)
 
 
-class FreeBike():
+class FreeBike:
     def __init__(self, data):
         self.id = data["bike_id"]
         self.lat = data["lat"]
@@ -93,7 +93,7 @@ class FreeBike():
             "is_reserved": self.reserved,
             "is_disabled": self.disabled,
             "current_range_meters": self.current_range,
-            "battery_pct": self.battery_pct
+            "battery_pct": self.battery_pct,
         }
 
 
@@ -141,6 +141,7 @@ def setup_initial_jobs(output_root: str, key: str, loop: bool = False):
 
     # Start in a loop if required
     if loop:
+
         def task():
             download_free_bikes(output_dir, free_bikes.url, vehicle_types)
 
@@ -150,10 +151,10 @@ def setup_initial_jobs(output_root: str, key: str, loop: bool = False):
 
 
 if __name__ == "__main__":
-    parser = argparse.ArgumentParser(description='Scrape micro-mobility locations from a GBFS provider.')
-    parser.add_argument('feed', help='Feed name to scrape')
-    parser.add_argument('--loop', action='store_true', help='Should the feed be continually scraped?')
-    parser.add_argument('--output', default="output", help="Directory to save data to.")
+    parser = argparse.ArgumentParser(description="Scrape micro-mobility locations from a GBFS provider.")
+    parser.add_argument("feed", help="Feed name to scrape")
+    parser.add_argument("--loop", action="store_true", help="Should the feed be continually scraped?")
+    parser.add_argument("--output", default="output", help="Directory to save data to.")
     args = parser.parse_args()
 
     # Run in a job loop if required

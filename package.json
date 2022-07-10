@@ -1,0 +1,16 @@
+{
+  "name": "website",
+  "description": "",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/rafraser/website.git"
+  },
+  "scripts": {
+    "eslint": "eslint"
+  },
+  "devDependencies": {
+    "eslint": "^8.19.0",
+    "eslint-config-airbnb-base": "^15.0.0",
+    "eslint-plugin-import": "^2.26.0"
+  }
+}

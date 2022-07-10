@@ -9,5 +9,6 @@ At the moment, all of these projects are standalone projects. Check the README i
 ### Projects List
 
 | Name | Description |
+| ---- | ----------- |
 | [energy-globe](./energy-globe/) | Visualising Earth's power stations using Mapbox's new globe feature |
 | [gbfs-heatmap](./gbfs-heatmap/) | Tracking bikeshare feeds to produce historical heatmaps |

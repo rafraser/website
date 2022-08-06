@@ -1,0 +1,16 @@
+{
+  "name": "laz-quick-viewer",
+  "description": "",
+  "scripts": {
+    "build": "esbuild src/index.ts --outfile=dist.js --bundle --define:process.env.MAPBOX_API_KEY=\\\"$MAPBOX_API_KEY\\\""
+  },
+  "devDependencies": {
+    "esbuild": "^0.14.48"
+  },
+  "dependencies": {
+    "@deck.gl/core": "^8.8.6",
+    "@deck.gl/layers": "^8.8.6",
+    "@loaders.gl/core": "^3.2.6",
+    "@loaders.gl/las": "^3.2.6"
+  }
+}

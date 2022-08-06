@@ -11,4 +11,5 @@ At the moment, all of these projects are standalone projects. Check the README i
 | Name | Description |
 | ---- | ----------- |
 | [energy-globe](./energy-globe/) | Visualising Earth's power stations using Mapbox's new globe feature |
-| [gbfs-heatmap](./gbfs-heatmap/) | Tracking bikeshare feeds to produce historical heatmaps |
+| [gbfs-heatmap](./gbfs-heatmap/) | [WIP] Tracking bikeshare feeds to produce historical heatmaps |
+| [laz-quick-viewer](./laz-quick-viewer/) | Simple webpage for viewing .laz point clouds, powered by deck.gl |

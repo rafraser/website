@@ -1,14 +1,14 @@
 const startColor = [54, 0, 51]
 const endColor = [11, 135, 147]
 
-export function colorForIntensity(intensity: number): number[] {
+export function colorForIntensity(maxIntensity: number, intensity: number): number[] {
   // Linearly interpolate gradient
   // Yes I know this whole function commits several crimes against visualization
-  const t = intensity / 255;
+  const t = intensity / maxIntensity;
   return [
-    startColor[0] + (endColor[0] - startColor[0]) * t,
-    startColor[1] + (endColor[1] - startColor[1]) * t,
-    startColor[2] + (endColor[2] - startColor[2]) * t
+    Math.floor(startColor[0] + (endColor[0] - startColor[0]) * t),
+    Math.floor(startColor[1] + (endColor[1] - startColor[1]) * t),
+    Math.floor(startColor[2] + (endColor[2] - startColor[2]) * t)
   ]
 }
 
@@ -27,6 +27,6 @@ const categoryColors = [
 ]
 const categoryCount = categoryColors.length;
 
-export function colorForClassifcation(classification: number) {
+export function colorForClassification(classification: number) {
   return categoryColors[classification % categoryCount];
 }

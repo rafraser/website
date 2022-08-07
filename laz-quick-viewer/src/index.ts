@@ -2,7 +2,7 @@ import { load } from '@loaders.gl/core';
 import { LASLoader } from '@loaders.gl/las';
 import { COORDINATE_SYSTEM, Deck, OrbitView } from '@deck.gl/core/typed';
 import { PointCloudLayer } from '@deck.gl/layers/typed';
-import { colorForClassifcation, colorForIntensity } from './color';
+import { colorForClassification, colorForIntensity } from './color';
 
 interface ViewOptions {
   forceIntensityView? : boolean
@@ -16,7 +16,7 @@ async function loadAndDisplayFile(url: string) {
   lastLoadedData = await load(url, LASLoader);
   console.log('loaded!', lastLoadedData);
 
-  updatePointCloudDisplay({})
+  updatePointCloudDisplay({ forceIntensityView: true })
 }
 
 function updatePointCloudDisplay(options: ViewOptions) {
@@ -29,11 +29,26 @@ function updatePointCloudDisplay(options: ViewOptions) {
 
 function createPointCloudLayer(data: any, options: ViewOptions) {
   // Super inefficient - can we do this better?
-  if (data.attributes.classification && !options.forceIntensityView) {
-    const colorData = Array.from(data.attributes.classification.value as Uint8Array).flatMap(colorForClassifcation)
+  if (data.attributes.COLOR && !options.forceIntensityView) {
+    // Already have color - pass!
+
+  } else if (data.attributes.classification && !options.forceIntensityView) {
+    // Calculate a categorical colour scheme from the classification code
+    const colorData = [] as number[];
+    (data.attributes.classification.value as Uint16Array).forEach((value) => {
+      const color = colorForClassification(value)
+      colorData.push(...color)
+    })
     data.attributes.COLOR = { size: 3, value: Uint8Array.from(colorData) }
+
   } else if (data.attributes.intensity) {
-    const colorData = Array.from(data.attributes.intensity.value as Uint16Array).flatMap(colorForIntensity)
+    // Calculate a gradient colour scheme from the intensity
+    const maxIntensity = (data.attributes.intensity.value as Uint16Array).reduce((acc, val) => val > acc ? val : acc)
+    const colorData = [] as number[];
+    (data.attributes.intensity.value as Uint16Array).forEach((value) => {
+      const color = colorForIntensity(maxIntensity, value)
+      colorData.push(...color)
+    })
     data.attributes.COLOR = { size: 3, value: Uint8Array.from(colorData) }
   }
 
@@ -51,7 +66,7 @@ function createPointCloudLayer(data: any, options: ViewOptions) {
     data: deckData,
     coordinateSystem: COORDINATE_SYSTEM.CARTESIAN,
     pickable: false,
-    pointSize: 2,
+    pointSize: 1,
     getPosition: (point) => point.POSITION,
   })
 }
@@ -78,4 +93,4 @@ const deckgl = new Deck({
   layers: []
 })
 
-loadAndDisplayFile('http://localhost:8000/test.laz')
+loadAndDisplayFile('http://localhost:8000/test2.las')

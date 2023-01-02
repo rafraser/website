@@ -13,3 +13,4 @@ At the moment, all of these projects are standalone projects. Check the README i
 | [energy-globe](./energy-globe/) | Visualising Earth's power stations using Mapbox's new globe feature |
 | [gbfs-heatmap](./gbfs-heatmap/) | [WIP] Tracking bikeshare feeds to produce historical heatmaps |
 | [laz-quick-viewer](./laz-quick-viewer/) | Simple webpage for viewing .laz point clouds, powered by deck.gl |
+| [ferry-tracker](./ferry-tracker/) | Live tracker of Brisbane's ferries |

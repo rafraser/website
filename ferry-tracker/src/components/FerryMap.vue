@@ -23,15 +23,47 @@ onMounted(() => {
 
     map.on('load', () => {
         map.addSource('ferries', { type: 'geojson', data: null });
+        map.loadImage('./ship.png', (error, image) => {
+            console.log(error, image)
+            map.addImage('anchor', image, { 'sdf': true })
+        })
+
+        map.addLayer({
+            id: 'ferry-glow',
+            type: 'circle',
+            source: 'ferries',
+            paint: {
+                'circle-blur': 1,
+                'circle-radius': 32,
+                'circle-color': '#f0932b',
+            }
+        })
+
         map.addLayer({
             id: 'ferry-circle',
             type: 'circle',
             source: 'ferries',
             paint: {
-                'circle-radius': 8,
-                'circle-color': '#f0932b',
-                'circle-stroke-color': 'white',
-                'circle-stroke-width': 2
+                'circle-radius': 12,
+                'circle-color': 'white',
+                'circle-stroke-color': '#f0932b',
+                'circle-stroke-width': 4
+            }
+        })
+
+        map.addLayer({
+            id: 'ferry-icon',
+            type: 'symbol',
+            source: 'ferries',
+            paint: {
+                'icon-color': '#f0932b'
+            },
+            layout: {
+                'icon-image': 'anchor',
+                'icon-size': 0.25,
+                'icon-offset': [0, -2],
+                'icon-allow-overlap': true,
+                'icon-anchor': 'center'
             }
         })
 
@@ -42,7 +74,7 @@ onMounted(() => {
             layout: {
                 'text-field': ['get', 'name'],
                 'text-variable-anchor': ['bottom'],
-                'text-radial-offset': 1,
+                'text-radial-offset': 1.5,
                 'text-font': ['Open Sans Semibold'],
                 'text-size': 14,
             },

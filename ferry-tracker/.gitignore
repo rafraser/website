@@ -1,0 +1,7 @@
+# GTFS extracted files
+*.txt
+all_stops.json
+
+# Protobuf & generated file
+proto/
+src/gen/*.ts

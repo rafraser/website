@@ -1,0 +1,12 @@
+{
+  "name": "puppetmaster",
+  "version": "1.0.0",
+  "description": "",
+  "type": "module",
+  "keywords": [],
+  "author": "Robert A Fraser",
+  "license": "MIT",
+  "dependencies": {
+    "puppeteer": "^19.6.3"
+  }
+}

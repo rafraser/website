@@ -1,0 +1,10 @@
+# Interim data files
+*.json
+*.geojson
+
+!package.json
+!package-lock.json
+
+# Saved promotional map files
+map_*.png
+*.gif

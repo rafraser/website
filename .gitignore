@@ -1,2 +1,9 @@
 node_modules/
 dist.js
+
+# Environment variables
+.env
+.env.*
+
+# Ignore all the test files I inevitably have lying around...
+test*.*

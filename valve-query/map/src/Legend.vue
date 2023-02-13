@@ -8,12 +8,13 @@
     </div>
 </template>
 
-<script setup>
+<script setup lang="ts">
 import { ref, computed, watch } from 'vue';
 import { choices, getGameServers } from './games';
 import { addFireflyLayers, removeFireflyLayers } from './fireflies';
+import type { Map } from 'mapbox-gl';
 
-async function getSource(map, name) {
+async function getSource(map: Map, name: string) {
     if (map.getSource(name)) {
         return name;
     }
@@ -23,13 +24,16 @@ async function getSource(map, name) {
     return name
 }
 
-async function onInput(e) {
-    const layer = e.target.id;
+async function onInput(e: Event) {
+    if (!e.currentTarget) return;
+    if (!(e.currentTarget instanceof Element)) return;
+
+    const layer = e.currentTarget.id;
     if (choices[layer].active) {
-        removeFireflyLayers(window.map, layer)
+        removeFireflyLayers(window.mapGL, layer);
     } else {
-        const sourceName = await getSource(map, layer, choices[layer].source)
-        addFireflyLayers(window.map, { source: sourceName, color: choices[layer].color })
+        const sourceName = await getSource(window.mapGL, layer);
+        addFireflyLayers(window.mapGL, { source: sourceName, color: choices[layer].color });
     }
 }
 </script>

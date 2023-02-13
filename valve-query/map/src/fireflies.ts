@@ -1,4 +1,13 @@
-export function addFireflyLayers(map, options={}) {
+import type { Map } from 'mapbox-gl'
+
+type FireflyOptions = {
+  color?: string;
+  size?: number;
+  source?: string;
+  scale?: number;
+}
+
+export function addFireflyLayers(map: Map, options: FireflyOptions = {}) {
   const color = options.color || 'orange';
   const size = options.size || 4;
   const source = options.source || 'fireflies';
@@ -39,8 +48,8 @@ export function addFireflyLayers(map, options={}) {
   })
 }
 
-export function removeFireflyLayers(map, source) {
-  map.removeLayer(`${source}-fireflies-2`)
-  map.removeLayer(`${source}-fireflies-1`)
-  map.removeLayer(`${source}-fireflies-0`)
+export function removeFireflyLayers(map: Map, name: string) {
+  map.removeLayer(`${name}-fireflies-2`)
+  map.removeLayer(`${name}-fireflies-1`)
+  map.removeLayer(`${name}-fireflies-0`)
 }

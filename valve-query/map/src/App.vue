@@ -12,9 +12,10 @@ import Legend from './Legend.vue'
 import BigText from './BigText.vue'
 import { choices, getGameServers } from './games';
 import { addFireflyLayers } from './fireflies';
+import type mapboxgl from 'mapbox-gl';
 
 const mapContainer = ref();
-const puppetGame = ref(null);
+const puppetGame = ref(null as string|null);
 
 onMounted(() => {
   const map = new mapbox.Map({
@@ -24,21 +25,21 @@ onMounted(() => {
     maxPitch: 0,
     minZoom: 1
   })
-  window.map = map;
+  window.mapGL = map;
 
   // Check URL params - if we have a game in there, switch to that instead of displaying the legend
   // This serves as a 'puppet' mode for promo screenshots
   map.on('load', async () => {
     const urlParams = new URLSearchParams(window.location.search);
     const gameParam = urlParams.get('game');
-    if (Object.keys(choices).includes(gameParam)) {
+    if (gameParam !== null && Object.keys(choices).includes(gameParam)) {
       map.fitBounds([[-180, -90], [180, 90]])
       await handlePuppetGame(map, gameParam)
     }
   })
 })
 
-async function handlePuppetGame(map, game) {
+async function handlePuppetGame(map: mapboxgl.Map, game: string) {
   puppetGame.value = game;
   const servers = await getGameServers(game);
   map.addSource(game, { 'type': 'geojson', 'data': servers })

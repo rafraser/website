@@ -1,4 +1,11 @@
+# Dependencies
 node_modules/
+elm-stuff/
+.npmrc
+
+# Build output
+.astro/
+dist/
 dist.js
 
 # Environment variables

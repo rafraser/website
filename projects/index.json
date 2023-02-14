@@ -1,0 +1,7 @@
+{
+    "vite-pages": [
+        "vue-test-project",
+        "elm-test-project",
+        "react-test-project"
+    ]
+}

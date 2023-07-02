@@ -1,0 +1,58 @@
+{
+  "version": 8,
+  "name": "Antarctica Test",
+  "metadata": {
+    "maputnik:renderer": "mbgljs"
+  },
+  "sources": {
+    "4jm735pl3": {
+      "type": "vector",
+      "url": "http://localhost:8080/index.json"
+    }
+  },
+  "sprite": "",
+  "layers": [
+    {
+      "id": "",
+      "type": "fill",
+      "source": "4jm735pl3",
+      "source-layer": "attempt2_3857",
+      "layout": {
+        "fill-sort-key": [
+          "get",
+          "depth"
+        ]
+      },
+      "paint": {
+        "fill-color": [
+          "match",
+          [
+            "get",
+            "depth"
+          ],
+          0,
+          "#f7fbff",
+          200,
+          "#deebf7",
+          1000,
+          "#c6dbef",
+          2000,
+          "#9ecae1",
+          3000,
+          "#6baed6",
+          4000,
+          "#4292c6",
+          5000,
+          "#2171b5",
+          6000,
+          "#08519c",
+          7000,
+          "#08306b",
+          "#f7fbff"
+        ],
+        "fill-opacity": 1
+      }
+    }
+  ],
+  "id": "3ww4s8v91"
+}

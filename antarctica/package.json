@@ -1,0 +1,13 @@
+{
+  "name": "antarctica",
+  "description": "",
+  "scripts": {
+    "build": "esbuild src/index.js --outfile=dist.js --bundle --minify"
+  },
+  "devDependencies": {
+    "esbuild": "^0.14.54"
+  },
+  "dependencies": {
+    "maplibre-gl": "^3.1.0"
+  }
+}

@@ -7,7 +7,7 @@
   "sources": {
     "4jm735pl3": {
       "type": "vector",
-      "url": "http://localhost:8080/index.json"
+      "url": "https://tiles.robertafraser.com/bathymetry_merged2.json"
     }
   },
   "sprite": "",
